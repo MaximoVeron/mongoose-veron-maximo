@@ -13,7 +13,7 @@ export const createUser = async (req, res) => {
 
 export const getUsers = async (req, res) => {
     try {
-        const users = await UserModel.find();
+        const users = await UserModel.find().populate("weapons").populate("race");
         return res.status(200).json(users);
     } catch (error) {
         console.error(error);

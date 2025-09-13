@@ -11,6 +11,9 @@ const RaceSchema = new Schema(
             type: String,
             required: true,
         }
+    },
+    {
+        versionKey: false,
     }
 )
 

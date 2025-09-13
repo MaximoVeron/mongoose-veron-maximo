@@ -11,6 +11,9 @@ const WeaponSchema = new Schema(
             type: Number,
             required: true,
         }
+    },
+    {
+        versionKey: false,
     }
 )
 
