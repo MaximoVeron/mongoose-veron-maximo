@@ -18,3 +18,9 @@ el metodo findById toma el parametro de la req y el body de la misma y la implem
 
 const deleteUser
 misma logica que update, solo que con delete 
+
+//elección de los modelos 
+Elegi una dinamica de usuario, raza y arma, siguiendo la estructura de un juego, un usuario se registra, puede elegir una raza y una categoria
+un usuario puede tener una raza y un arma (weapon) 
+una raza puede pertenecer a muchos usuarios / un usuario puede elegir una raza
+un arma puede pertenecer a muchos usuarios / muchos usuarios pueden tener un arma 

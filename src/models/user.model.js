@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 const UserSchema = new Schema(
   {
@@ -16,6 +16,14 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    race: { 
+      type: Types.ObjectId,
+       ref: 'Race' 
+    },
+    weapons: [{
+       type: Types.ObjectId,
+       ref: 'Weapon'
+    }],
   },
   {
     versionKey: false,
