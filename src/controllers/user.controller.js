@@ -1,4 +1,5 @@
 import { UserModel } from "../models/user.model.js";
+import { WeaponModel } from "../models/weapon.model.js";
 
 export const createUser = async (req, res) => {
     try {
@@ -13,7 +14,8 @@ export const createUser = async (req, res) => {
 
 export const getUsers = async (req, res) => {
     try {
-        const users = await UserModel.find().populate("weapons").populate("race");
+        // Solo usuarios activos
+        const users = await UserModel.find({ isActive: true }).populate("weapons").populate("race");
         return res.status(200).json(users);
     } catch (error) {
         console.error(error);
@@ -49,11 +51,21 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     try {
-        const user = await UserModel.findByIdAndDelete(req.params.id);
+        // Eliminación lógica del usuario
+        const user = await UserModel.findByIdAndUpdate(
+            req.params.id,
+            { isActive: false },
+            { new: true }
+        );
         if (!user) {
             return res.status(404).json({ message: "Usuario no encontrado" });
         }
-        return res.status(200).json({ message: "Usuario eliminado" });
+        // Eliminación en cascada: quitar referencia del usuario en armas
+        await WeaponModel.updateMany(
+            { _id: { $in: user.weapons } },
+            { $pull: { owners: user._id } }
+        );
+        return res.status(200).json({ message: "Usuario eliminado lógicamente y referencias actualizadas" });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Error al eliminar el usuario" });

@@ -16,6 +16,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    isActive: {
+      type: Boolean,
+      default: true
+    },
     race: { 
       type: Types.ObjectId,
        ref: 'Race' 
