@@ -23,7 +23,7 @@ export const getUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
     try {
-        const user = await UserModel.findById(req.params.id);
+        const user = await UserModel.findById(req.params.id).populate("weapons").populate("race");
         if (!user) {
             return res.status(404).json({ message: "Usuario no encontrado" });
         }
@@ -36,7 +36,7 @@ export const getUserById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate("weapons").populate("race");
         if (!user) {
             return res.status(404).json({ message: "Usuario no encontrado" });
         }

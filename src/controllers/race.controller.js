@@ -1,6 +1,6 @@
 import { RaceModel } from "../models/race.model.js";
 
-export const createUser = async (req, res) => {
+export const createRace = async (req, res) => {
     try {
         const newRace = new RaceModel(req.body);
         await newRace.save();
@@ -44,5 +44,18 @@ export const updateRace = async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Error al actualizar la raza" });
+    }
+};
+
+export const deleteRace = async (req, res) => {
+    try {
+        const deleteRace = await RaceModel.findByIdAndDelete(req.params.id);
+        if (!deleteRace) {
+            return res.status(404).json({ message: "Raza no encontrada" });
+        }
+        return res.status(200).json({ message: "Raza eliminada correctamente" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error al eliminar la raza" });
     }
 };
