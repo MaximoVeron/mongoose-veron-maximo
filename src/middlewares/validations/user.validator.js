@@ -1,5 +1,5 @@
 import {body, param} from "express-validator";
-import {usernameExists, emailExists, userExists, raceExist} from "../../helpers/custom/custom.user.js";
+import {usernameExists, emailExists, userExists, raceExist, weaponsExist} from "../../helpers/custom/user.custom.js";
 
 export const userCreationValidation = [
     body("username")
@@ -19,10 +19,13 @@ export const userCreationValidation = [
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])/).withMessage("La contraseña debe contener al menos una letra minúscula, una letra mayúscula y un carácter especial")
         .escape(),
     body("race")
+        .notEmpty().withMessage("La raza es obligatoria")
         .isMongoId().withMessage("La raza debe ser un ID válido")
         .custom(raceExist),
     body("weapons")
         .isArray().withMessage("Las armas deben ser un array")
+        .custom(weaponsExist)
+        .optional()
 ];
 
 export const userIdValidation = [

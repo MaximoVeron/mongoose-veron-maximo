@@ -23,7 +23,7 @@ export const getRaces = async (req, res) => {
 
 export const getRaceById = async (req, res) => {
     try {
-     const raceId = RaceModel.findById(req.params.id);
+     const raceId = await RaceModel.findById(req.params.id);
         if (!raceId) {
             return res.status(404).json({ message: "Raza no encontrada" });
         }   

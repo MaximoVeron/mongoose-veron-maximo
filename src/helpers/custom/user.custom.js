@@ -29,3 +29,12 @@ export const raceExist = async (id) => {
         throw new Error("La raza no existe");
     }
 };
+
+export const weaponsExist = async (weapons) => {
+  if (!Array.isArray(weapons)) throw new Error("Las armas deben ser un array");
+  for (const id of weapons) {
+    if (!mongoose.Types.ObjectId.isValid(id)) throw new Error(`ID de arma inválido: ${id}`);
+    const weapon = await WeaponModel.findById(id);
+    if (!weapon) throw new Error(`El arma con id ${id} no existe`);
+  }
+};
