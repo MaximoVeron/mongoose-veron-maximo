@@ -11,10 +11,12 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      match: /.+\@.+\..+/
     },
     password: {
       type: String,
       required: true,
+      select: false
     },
     isActive: {
       type: Boolean,
