@@ -11,25 +11,27 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: /.+\@.+\..+/
+      match: /.+\@.+\..+/,
     },
     password: {
       type: String,
       required: true,
-      select: false
+      select: false,
     },
     isActive: {
       type: Boolean,
-      default: true
+      default: true,
     },
-    race: { 
+    race: {
       type: Types.ObjectId,
-       ref: 'Race' 
+      ref: "Race",
     },
-    weapons: [{
-       type: Types.ObjectId,
-       ref: 'Weapon'
-    }],
+    weapons: [
+      {
+        type: Types.ObjectId,
+        ref: "Weapon",
+      },
+    ],
   },
   {
     versionKey: false,

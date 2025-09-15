@@ -1,8 +1,16 @@
 import { Router } from "express";
-import { createUser, getUsers, getUserById, updateUser, deleteUser } from "../controllers/user.controller.js";
+import {
+  createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "../controllers/user.controller.js";
 import { applyValidations } from "../middlewares/catchvalidation.js";
-import { userCreationValidation, userIdValidation } from "../middlewares/validations/user.validator.js";
-
+import {
+  userCreationValidation,
+  userIdValidation,
+} from "../middlewares/validations/user.validator.js";
 
 const userRouter = Router();
 

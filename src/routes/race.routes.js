@@ -1,7 +1,16 @@
 import { Router } from "express";
-import { createRace, getRaces, getRaceById, updateRace, deleteRace } from "../controllers/race.controller.js";
+import {
+  createRace,
+  getRaces,
+  getRaceById,
+  updateRace,
+  deleteRace,
+} from "../controllers/race.controller.js";
 import { applyValidations } from "../middlewares/catchvalidation.js";
-import { raceIdValidation, createRaceValidation } from "../middlewares/validations/race.validator.js";
+import {
+  raceIdValidation,
+  createRaceValidation,
+} from "../middlewares/validations/race.validator.js";
 
 const raceRouter = Router();
 
