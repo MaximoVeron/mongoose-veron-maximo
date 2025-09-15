@@ -1,5 +1,9 @@
 import { body, param } from "express-validator";
-import { raceExists, raceIdExists } from "../custom/race.custom.js";
+import {
+  raceExists,
+  raceIdExists,
+  updateRaceNameUnique,
+} from "../custom/race.custom.js";
 
 export const createRaceValidation = [
   body("name")
@@ -25,4 +29,22 @@ export const raceIdValidation = [
     .isMongoId()
     .withMessage("El id no es válido")
     .custom(raceIdExists),
+];
+
+export const updateRaceValidation = [
+  body("name")
+    .optional()
+    .isLength({ min: 3, max: 30 })
+    .withMessage("El nombre debe tener entre 3 y 30 caracteres")
+    .isAlpha()
+    .withMessage("El nombre solo puede contener letras")
+    .trim()
+    .escape()
+    .custom((value, { req }) => updateRaceNameUnique(value, req.params.id)),
+  body("description")
+    .optional()
+    .isLength({ max: 200 })
+    .withMessage("La descripción no puede exceder los 200 caracteres")
+    .trim()
+    .escape(),
 ];

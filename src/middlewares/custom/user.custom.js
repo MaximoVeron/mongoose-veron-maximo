@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { UserModel } from "../../models/user.model.js";
 import { RaceModel } from "../../models/race.model.js";
 import { WeaponModel } from "../../models/weapon.model.js";
