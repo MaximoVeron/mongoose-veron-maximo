@@ -1,5 +1,5 @@
 import { body, param } from "express-validator";
-import { raceExists, raceIdExists } from "../../helpers/custom/race.custom.js";
+import { raceExists, raceIdExists } from "../custom/race.custom.js";
 
 export const createRaceValidation = [
   body("name")

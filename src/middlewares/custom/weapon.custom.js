@@ -13,3 +13,10 @@ export const weaponIdExists = async (id) => {
     throw new Error("El arma no existe");
   }
 };
+
+export const updateWeaponNameUnique = async (name, id) => {
+  const weapon = await WeaponModel.findOne({ name, _id: { $ne: id } });
+  if (weapon) {
+    throw new Error("El nombre del arma ya está en uso");
+  }
+};

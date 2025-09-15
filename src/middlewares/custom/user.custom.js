@@ -39,3 +39,17 @@ export const weaponsExist = async (weapons) => {
     if (!weapon) throw new Error(`El arma con id ${id} no existe`);
   }
 };
+
+export const updateUniqueUsername = async (username, id) => {
+  const user = await UserModel.findOne({ username, _id: { $ne: id } });
+  if (user) {
+    throw new Error("Username already in use");
+  }
+};
+
+export const updateUniqueEmail = async (email, id) => {
+  const user = await UserModel.findOne({ email, _id: { $ne: id } });
+  if (user) {
+    throw new Error("Email already in use");
+  }
+};

@@ -10,6 +10,7 @@ import { applyValidations } from "../middlewares/catchvalidation.js";
 import {
   weaponIdValidation,
   createWeaponValidation,
+  updateWeaponValidation,
 } from "../middlewares/validations/weapon.validator.js";
 
 const weaponRouter = Router();
@@ -30,6 +31,7 @@ weaponRouter.get(
 weaponRouter.put(
   "/weapons/:id",
   weaponIdValidation,
+  updateWeaponValidation,
   applyValidations,
   updateWeapon
 );
